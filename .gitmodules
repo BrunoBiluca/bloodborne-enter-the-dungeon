@@ -1,6 +1,3 @@
-[submodule "UnityFoundation"]
-	path = UnityFoundation
-	url = https://github.com/BrunoBiluca/UnityFoundation.git
 [submodule "BloodborneGame/UnityFoundation"]
 	path = BloodborneGame/UnityFoundation
 	url = https://github.com/BrunoBiluca/UnityFoundation.git
