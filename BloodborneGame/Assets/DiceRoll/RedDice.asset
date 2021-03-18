@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e109551169843e4ba6dabf9ea601e17, type: 3}
+  m_Name: RedDice
+  m_EditorClassIdentifier: 
+  diceType: 2
+  sides:
+  - {fileID: 11400000, guid: bcfc07ab3cd14a04b8272ff3bd5feba1, type: 2}
+  - {fileID: 11400000, guid: 984b94969c92c1e42b68932818322a3f, type: 2}
+  - {fileID: 11400000, guid: 418986c632f258d4facaa0aee6a4a1f9, type: 2}
+  - {fileID: 11400000, guid: 1f97df7fa7289874f884ed7c1dd20355, type: 2}
+  - {fileID: 11400000, guid: 54bfc3aeef49c0048a22fc1c4a05f27a, type: 2}
+  - {fileID: 11400000, guid: f7207545786984b4486b13471cab59c4, type: 2}
+  sprite: {fileID: 21300000, guid: 35e578a8ccf734a46be085c514a64849, type: 3}

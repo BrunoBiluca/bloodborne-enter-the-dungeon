@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,22 @@ using UnityEngine;
 public class DiceRollManager : MonoBehaviour {
     public static DiceRollManager Instance { get; private set; }
 
-    public Dice greenDice;
-
     public void Awake() {
         Instance = this;
-
-        greenDice = new Dice()
-            .AddSide(DiceSide.ZERO)
-            .AddSide(DiceSide.ZERO)
-            .AddSide(DiceSide.ONE)
-            .AddSide(DiceSide.ONEPLUS)
-            .AddSide(DiceSide.ONEPLUS)
-            .AddSide(DiceSide.TWO);
     }
 
-    public DiceSide Roll() {
-        return greenDice.Roll();
+    public void Roll(DiceSO dice, Action<DiceSideSO> callback) {
+        var selectedIndex = UnityEngine.Random.Range(0, dice.SidesCount);
+
+        var selectedSide = dice.sides[selectedIndex];
+
+        StartCoroutine(CallDiceRollAnimation(dice, selectedSide, callback));
+    }
+
+    private IEnumerator CallDiceRollAnimation(
+        DiceSO dice, DiceSideSO selectedSide, Action<DiceSideSO> callback
+    ) {
+        yield return DiceRollUI.Instance.Roll(dice, selectedSide);
+        callback(selectedSide);
     }
 }
