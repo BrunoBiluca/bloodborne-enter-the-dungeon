@@ -21,7 +21,7 @@ public class HunterHealth : MonoBehaviour, IHealthBar {
     }
 
 
-    public void SetSize(float currentHealth) {
+    public void SetCurrentHealth(float currentHealth) {
         this.currentHealth = Mathf.Clamp(currentHealth, 0, baseHealth);
         text.text = Mathf.FloorToInt(this.currentHealth).ToString();
     }

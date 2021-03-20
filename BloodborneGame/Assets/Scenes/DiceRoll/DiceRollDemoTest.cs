@@ -15,21 +15,15 @@ public class DiceRollDemoTest : MonoBehaviour {
 
     void Start() {
         greenRollButton.onClick.AddListener(() => {
-            DiceRollManager.Instance.Roll(greenDice, (side) => {
-                Debug.Log(side);
-            });
+            Debug.Log(DiceRollManager.Instance.Roll(greenDice));
         });
 
         yellowRollButton.onClick.AddListener(() => {
-            DiceRollManager.Instance.Roll(yellowDice, (side) => {
-                Debug.Log(side);
-            });
+            Debug.Log(DiceRollManager.Instance.Roll(greenDice));
         });
 
         redRollButton.onClick.AddListener(() => {
-            DiceRollManager.Instance.Roll(redDice, (side) => {
-                Debug.Log(side);
-            });
+            Debug.Log(DiceRollManager.Instance.Roll(greenDice));
         });
 
     }

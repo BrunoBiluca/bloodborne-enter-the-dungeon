@@ -14,5 +14,7 @@ public class DiceSO : ScriptableObject {
     public DiceType diceType;
     public List<DiceSideSO> sides;
     public int SidesCount { get { return sides.Count; } }
+
     public Sprite sprite;
+    public Sprite lanternSprite;
 }

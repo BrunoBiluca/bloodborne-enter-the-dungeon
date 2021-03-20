@@ -10,18 +10,17 @@ public class DiceRollManager : MonoBehaviour {
         Instance = this;
     }
 
-    public void Roll(DiceSO dice, Action<DiceSideSO> callback) {
+    public DiceSideSO Roll(DiceSO dice) {
         var selectedIndex = UnityEngine.Random.Range(0, dice.SidesCount);
 
         var selectedSide = dice.sides[selectedIndex];
-
-        StartCoroutine(CallDiceRollAnimation(dice, selectedSide, callback));
+        StartCoroutine(CallDiceRollAnimation(dice, selectedSide));
+        return selectedSide;
     }
 
     private IEnumerator CallDiceRollAnimation(
-        DiceSO dice, DiceSideSO selectedSide, Action<DiceSideSO> callback
+        DiceSO dice, DiceSideSO selectedSide
     ) {
         yield return DiceRollUI.Instance.Roll(dice, selectedSide);
-        callback(selectedSide);
     }
 }
