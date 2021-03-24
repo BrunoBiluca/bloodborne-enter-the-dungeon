@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01e132d0f5b873d4bb2de66acf93be9b, type: 3}
-  m_Name: CainhurstBloodyCrow
+  m_Name: GuardDogOfTheOldLords
   m_EditorClassIdentifier: 
-  enemyPicture: {fileID: 2100000, guid: 0960d6e80b5263644a05314a9c280e71, type: 2}
-  enemyCardPrefab: {fileID: 7304246396129163227, guid: 0605dba2b2cdcde47b0a339fb986d23b, type: 3}
-  enemyName: Cainhurst Bloody Crow
-  isBoss: 0
-  description: 
-  echoesCounter: 6
+  enemyPicture: {fileID: 2100000, guid: f851044eaba325949b5b24da4c6c3957, type: 2}
+  enemyCardPrefab: {fileID: 5023001623430486127, guid: e3e8bd8eea14be640b05d482acf176b8, type: 3}
+  enemyName: "C\xE3o de guarda dos Antigos Lordes"
+  isBoss: 1
+  description: "Cada Arma de fogo causa no m\xE1ximo 1 de dano a este inimigo."
+  echoesCounter: 12
   lantern: {fileID: 11400000, guid: 97cd514d97f22d444a92dfcabdcda012, type: 2}

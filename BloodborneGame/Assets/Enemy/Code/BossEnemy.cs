@@ -1,14 +1,11 @@
-using Assets.UnityFoundation.GameManagers;
-using Assets.UnityFoundation.HealthSystem;
 using Assets.UnityFoundation.TimeUtils;
-using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IEnemy {
+public class BossEnemy : MonoBehaviour, IEnemy {
 
     // TODO: buscar esse prefab depois do GameAssets
     [SerializeField] private GameObject echoesPrefab;
@@ -26,7 +23,7 @@ public class Enemy : MonoBehaviour, IEnemy {
 
         var frontFace = transform.Find("front");
 
-        frontFace.Find("enemyPicture")
+        frontFace.Find("bossPicture")
             .GetComponent<MeshRenderer>().material = enemySO.enemyPicture;
 
         nameText = frontFace.Find("name").GetComponent<TMP_Text>();
@@ -67,6 +64,5 @@ public class Enemy : MonoBehaviour, IEnemy {
             attackFinished();
         });
     }
-
 
 }

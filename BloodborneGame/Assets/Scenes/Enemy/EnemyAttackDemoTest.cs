@@ -10,8 +10,12 @@ public class EnemyAttackDemoTest : MonoBehaviour {
     public Button randomCardButton;
     public Button enemyDamageButton;
     public Button enemyAttackButton;
+    public Button callHunterButton;
 
     public Transform cardSpawn;
+
+    public Transform hunterHolder;
+    public GameObject hunterPrefab;
 
     void Awake() {
 
@@ -27,21 +31,29 @@ public class EnemyAttackDemoTest : MonoBehaviour {
                 Quaternion.identity, 
                 cardSpawn
             );
-            enemyCard.GetComponent<Enemy>().Setup(enemy);
+            enemyCard.GetComponent<IEnemy>().Setup(enemy);
 
         });
 
         enemyAttackButton.onClick.AddListener(() => {
             var enemyCard = cardSpawn.GetChild(0);
-            if(enemyCard == null) Debug.Log("Instancie uma carta de inimigo antes");
+            if(enemyCard == null) {
+                Debug.Log("Instancie uma carta de inimigo antes");
+                return;
+            }
 
-            enemyCard.GetComponent<Enemy>().Attack();
+            enemyCard.GetComponent<IEnemy>().Attack(() => {
+                Debug.Log("Attack done");
+            });
         });
 
-    }
+        callHunterButton.onClick.AddListener(() => {
+            if(hunterHolder.childCount > 0) {
+                Destroy(hunterHolder.GetChild(0).gameObject);
+            }
 
-    // Update is called once per frame
-    void Update() {
+            Instantiate(hunterPrefab, hunterHolder);
+        });
 
     }
 }

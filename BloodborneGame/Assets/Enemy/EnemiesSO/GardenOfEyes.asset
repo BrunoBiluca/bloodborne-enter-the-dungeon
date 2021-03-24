@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e132d0f5b873d4bb2de66acf93be9b, type: 3}
   m_Name: GardenOfEyes
   m_EditorClassIdentifier: 
-  enemyPicture: {fileID: 0}
+  enemyPicture: {fileID: 2100000, guid: 2206de17e3517a948b6535dd8a03adcc, type: 2}
   enemyCardPrefab: {fileID: 7304246396129163227, guid: 0605dba2b2cdcde47b0a339fb986d23b, type: 3}
   enemyName: Jardim de olhos
+  isBoss: 0
   description: 
   echoesCounter: 7
   lantern: {fileID: 11400000, guid: 4895ab491d2cf5343b12cd22b0480410, type: 2}

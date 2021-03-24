@@ -12,15 +12,13 @@ public class DiceRollManager : MonoBehaviour {
 
     public DiceSideSO Roll(DiceSO dice) {
         var selectedIndex = UnityEngine.Random.Range(0, dice.SidesCount);
-
         var selectedSide = dice.sides[selectedIndex];
-        StartCoroutine(CallDiceRollAnimation(dice, selectedSide));
         return selectedSide;
     }
 
-    private IEnumerator CallDiceRollAnimation(
-        DiceSO dice, DiceSideSO selectedSide
-    ) {
+    public IEnumerator RollWithAnimation(DiceSO dice, Action<DiceSideSO> callback) {
+        var selectedSide = Roll(dice);
         yield return DiceRollUI.Instance.Roll(dice, selectedSide);
+        callback(selectedSide);
     }
 }
