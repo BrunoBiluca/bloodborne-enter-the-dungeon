@@ -10,16 +10,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IEnemy {
 
-    // TODO: buscar esse prefab depois do GameAssets
-    [SerializeField] private GameObject echoesPrefab;
-    [SerializeField] private Transform spawnEchoesReference;
-
     private EnemySO enemySO;
 
     private TMP_Text nameText;
     private TMP_Text descriptionText;
     private TMP_Text echoesCount;
     private SpriteRenderer lanternIcon;
+
+    private HealthSystem healthSystem;
 
     public void Setup(EnemySO enemySO) {
         this.enemySO = enemySO;
@@ -45,21 +43,8 @@ public class Enemy : MonoBehaviour, IEnemy {
         lanternIcon = frontFace.Find("lanternIcon").GetComponent<SpriteRenderer>();
         lanternIcon.sprite = enemySO.lantern.lanternSprite;
 
-        spawnEchoesReference = transform.Find("spawnEchoesReference");
-        StartCoroutine(SpawnEchoes());
-    }
-
-    private IEnumerator SpawnEchoes() {
-        for(var i = 0; i < enemySO.echoesCounter; i++) {
-            Instantiate(
-                echoesPrefab,
-                spawnEchoesReference.position,
-                Quaternion.identity,
-                transform
-            );
-
-            yield return WaittingCoroutine.RealSeconds(.2f);
-        }
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.Setup(enemySO.echoesCounter);
     }
 
     public void Attack(Action attackFinished) {
@@ -68,5 +53,7 @@ public class Enemy : MonoBehaviour, IEnemy {
         });
     }
 
-
+    public void Damage(int amount, Action damageFinished) {
+        healthSystem.Damage(amount);
+    }
 }

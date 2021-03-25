@@ -47,6 +47,18 @@ public class EnemyAttackDemoTest : MonoBehaviour {
             });
         });
 
+        enemyDamageButton.onClick.AddListener(() => {
+            var enemyCard = cardSpawn.GetChild(0);
+            if(enemyCard == null) {
+                Debug.Log("Instancie uma carta de inimigo antes");
+                return;
+            }
+
+            enemyCard.GetComponent<IEnemy>().Damage(1, () => {
+                Debug.Log("Damage finished");
+            });
+        });
+
         callHunterButton.onClick.AddListener(() => {
             if(hunterHolder.childCount > 0) {
                 Destroy(hunterHolder.GetChild(0).gameObject);
