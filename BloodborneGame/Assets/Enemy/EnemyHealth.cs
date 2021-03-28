@@ -28,8 +28,21 @@ public class EnemyHealth : MonoBehaviour, IHealthBar {
     public void SetCurrentHealth(float currentHealth) {
         if(currentHealth == 0) return;
 
-        var randomEcho = Random.Range(0, transform.childCount);
-        Destroy(transform.GetChild(randomEcho).gameObject);
+        var removeEchoesList = new List<int>();
+
+        var removeEchoes = transform.childCount - (int)currentHealth;
+        while(removeEchoesList.Count < removeEchoes) {
+            var randomEcho = Random.Range(0, transform.childCount);
+            if(!removeEchoesList.Contains(randomEcho)) {
+                removeEchoesList.Add(randomEcho);
+            }
+        }
+
+        foreach(var id in removeEchoesList) {
+            Destroy(transform.GetChild(id).gameObject);
+        }
+        
+
     }
 
 }

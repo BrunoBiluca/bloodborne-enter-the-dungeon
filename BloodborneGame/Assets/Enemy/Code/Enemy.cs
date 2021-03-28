@@ -54,7 +54,11 @@ public class Enemy : MonoBehaviour, IEnemy {
     }
 
     public void Damage(int amount, Action<int> damageFinished) {
-        healthSystem.Damage(amount);
-        damageFinished(amount);
+        var damageAmount = healthSystem.CurrentHealth - amount < 0
+            ? (int)healthSystem.CurrentHealth
+            : amount;
+
+        healthSystem.Damage(damageAmount);
+        damageFinished(damageAmount);
     }
 }

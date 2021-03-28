@@ -22,7 +22,7 @@ public class HuntersAttackDemoManager : MonoBehaviour {
         });
 
         chooseHunterCardButton.onClick.AddListener(() => {
-            hunter.ChooseCard(cards[0]);
+            hunter.ChooseCard(cards[Random.Range(0, cards.Length)]);
         });
 
         executeTurnButton.onClick.AddListener(() => {

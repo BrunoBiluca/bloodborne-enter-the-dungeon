@@ -7,9 +7,8 @@ public class StockSystem : MonoBehaviour {
     private int count;
 
     public void Add(int amount) {
-        count += amount;
-
         for(var i = 0; i < amount; i++) {
+            count++;
             var echoGO = Instantiate(
                 GameAssets.Instance.echoesPrefab, 
                 transform

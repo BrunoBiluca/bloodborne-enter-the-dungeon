@@ -24,12 +24,12 @@ public class HuntersAttackTurn : ITurn {
             Debug.Log($"Using {card.cardName}");
             enemy.Damage(
                 card.damage,
-                (damage) => { 
+                (damageDealt) => { 
                     Debug.Log("Damage Finished");
 
                     Debug.Log("Start - Adding Echoes to Hunter's stock");
 
-                    hunter.AddEchoes(damage);
+                    hunter.AddEchoes(damageDealt);
 
                     Debug.Log("End - Adding Echoes to Hunter's stock");
 
