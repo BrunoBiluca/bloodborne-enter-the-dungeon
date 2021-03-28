@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class EnemyAttackDemoTest : MonoBehaviour {
 
-    public EnemyListSO availableEnemies;
-
     public Button randomCardButton;
     public Button enemyDamageButton;
     public Button enemyAttackButton;
@@ -18,21 +16,8 @@ public class EnemyAttackDemoTest : MonoBehaviour {
     public GameObject hunterPrefab;
 
     void Awake() {
-
-        availableEnemies = Resources.Load<EnemyListSO>("AllEnemies");
-
         randomCardButton.onClick.AddListener(() => {
-            if(cardSpawn.childCount > 0) Destroy(cardSpawn.GetChild(0).gameObject);
-
-            var enemy = availableEnemies.enemies[Random.Range(0, availableEnemies.enemies.Count)];
-            var enemyCard = Instantiate(
-                enemy.enemyCardPrefab, 
-                new Vector3(0, 0, 0), 
-                Quaternion.identity, 
-                cardSpawn
-            );
-            enemyCard.GetComponent<IEnemy>().Setup(enemy);
-
+            EnemySpawner.Instance.SpawnRandomEnemy();
         });
 
         enemyAttackButton.onClick.AddListener(() => {
@@ -54,7 +39,7 @@ public class EnemyAttackDemoTest : MonoBehaviour {
                 return;
             }
 
-            enemyCard.GetComponent<IEnemy>().Damage(1, () => {
+            enemyCard.GetComponent<IEnemy>().Damage(1, (damage) => {
                 Debug.Log("Damage finished");
             });
         });

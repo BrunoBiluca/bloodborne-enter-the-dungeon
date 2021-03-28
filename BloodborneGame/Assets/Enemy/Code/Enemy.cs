@@ -53,7 +53,8 @@ public class Enemy : MonoBehaviour, IEnemy {
         });
     }
 
-    public void Damage(int amount, Action damageFinished) {
+    public void Damage(int amount, Action<int> damageFinished) {
         healthSystem.Damage(amount);
+        damageFinished(amount);
     }
 }
