@@ -11,4 +11,10 @@ Agora já é possível escolher uma carta do caçador para infringir dano no mon
 
 ![](Docs/hunter_attack_turn.PNG)
 
+- Dia 3
 
+Criação do sistema de pilha das cartas descartadas
+
+Para cada carta utilizada pelo caçador, quando este já foi utilizada ela vai direto para a pilha de descarte
+
+![](Docs/discart_stack.PNG)

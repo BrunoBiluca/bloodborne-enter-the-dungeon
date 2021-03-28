@@ -2,15 +2,21 @@ using Assets.UnityFoundation.HealthSystem;
 using UnityEngine;
 
 public class Hunter : MonoBehaviour {
-    [SerializeField] private Transform hunterCardReferencePoint;
+    private Transform hunterCardReferencePoint;
     public Optional<HunterCardSO> CurrentCard { get; private set; }
 
     private HealthSystem healthSystem;
     private StockSystem stockSystem;
+    private DiscartStackSystem discartStackSystem;
+
+    private void Awake() {
+        hunterCardReferencePoint = transform.Find("hunterCard");
+    }
 
     void Start() {
         healthSystem = GetComponent<HealthSystem>();
         stockSystem = transform.Find("echoesStock").GetComponent<StockSystem>();
+        discartStackSystem = transform.Find("discartStack").GetComponent<DiscartStackSystem>();
 
         CurrentCard = Optional<HunterCardSO>.None();
     }
@@ -26,12 +32,17 @@ public class Hunter : MonoBehaviour {
         }
 
         var cardGO = Instantiate(card.cardPrefab, hunterCardReferencePoint);
+        cardGO.transform.localRotation = Quaternion.Euler(-90, 0, 0);
+        cardGO.transform.localPosition = new Vector3(0, 0, -1);
         cardGO.GetComponent<HunterCard>().Setup(card);
     }
 
     public void DiscartCard() {
         CurrentCard.Some((currentCard) => {
             Destroy(hunterCardReferencePoint.GetChild(0).gameObject);
+
+            discartStackSystem.DiscartCard(currentCard);
+
             CurrentCard = Optional<HunterCardSO>.None();
         });
     }
