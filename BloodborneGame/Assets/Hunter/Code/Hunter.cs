@@ -10,7 +10,7 @@ public class Hunter : MonoBehaviour {
     private DiscartStackSystem discartStackSystem;
 
     private void Awake() {
-        hunterCardReferencePoint = transform.Find("hunterCard");
+        hunterCardReferencePoint = transform.Find("hunterCardReference");
     }
 
     void Start() {

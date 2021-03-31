@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITurn {
+public interface IImmediateEffect {
 
-    public void Execute();
+    public void Handle();
 
 }
