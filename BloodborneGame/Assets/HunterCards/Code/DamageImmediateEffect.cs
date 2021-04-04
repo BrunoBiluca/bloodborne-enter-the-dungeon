@@ -29,4 +29,8 @@ public class DamageImmediateEffect : CardEffect, IImmediateEffect {
             );
         }
     }
+
+    public override CardEffectType EffectType() {
+        return CardEffectType.immediateEffect;
+    }
 }

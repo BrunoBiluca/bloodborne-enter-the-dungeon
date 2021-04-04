@@ -17,12 +17,26 @@ internal class ImmediateEffectTurn : ITurn {
                 if(!(currentCard.effect is IImmediateEffect))
                     return;
 
-                if(currentCard.effect is DamageImmediateEffect effect) {
-                    effect.Setup(currentCard.damage, hunter)
-                          .Handle();
+                if(currentCard.effect is DamageImmediateEffect) {
+                    ResolveDamageImmediateEffect(currentCard.damage, hunter, currentCard.effect);
                 }
+
+                if(currentCard.effect is FullyHealImmediateEffect) {
+                    ResolveFullyHealImmediateEffect(currentCard.effect);
+                }
+
                 hunter.DiscartCard();
             });
         }
+    }
+
+    private void ResolveFullyHealImmediateEffect(CardEffect effect) {
+        ((FullyHealImmediateEffect)effect).Setup(hunters).Handle();
+    }
+
+    private void ResolveDamageImmediateEffect(
+        int damage, Hunter hunter, CardEffect effect
+    ) {
+        ((DamageImmediateEffect)effect).Setup(damage, hunter).Handle();
     }
 }

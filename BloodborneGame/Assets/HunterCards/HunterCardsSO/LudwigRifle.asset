@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c4b11b5fbd3c0d4793b3a30b2f213ed, type: 3}
-  m_Name: HunterPistol
+  m_Name: LudwigRifle
   m_EditorClassIdentifier: 
-  cardName: Hunter Pistol
-  damage: 1
+  cardName: Ludwig rifle
+  damage: 2
   effectDescription: 
-  isInitialCard: 1
-  cardPicture: {fileID: 2100000, guid: b214ea6334fce3d479a9e1e4660f4c8a, type: 2}
+  isInitialCard: 0
+  cardPicture: {fileID: 2100000, guid: 00dfca797599d4a48a1d7928939d274c, type: 2}
   cardPrefab: {fileID: 4297651275368728053, guid: 57d67a4446b41274bb559620f000ba5b, type: 3}
   effect: {fileID: 1304063162073638264, guid: 00a7061f827573e43a3ffccc21fa3558, type: 3}

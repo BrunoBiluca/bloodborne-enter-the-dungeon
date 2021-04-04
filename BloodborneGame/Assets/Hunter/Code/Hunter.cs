@@ -5,7 +5,7 @@ public class Hunter : MonoBehaviour {
     private Transform hunterCardReferencePoint;
     public Optional<HunterCardSO> CurrentCard { get; private set; }
 
-    private HealthSystem healthSystem;
+    public HealthSystem HealthSystem { get; private set; }
     private StockSystem stockSystem;
     private DiscartStackSystem discartStackSystem;
 
@@ -14,7 +14,7 @@ public class Hunter : MonoBehaviour {
     }
 
     void Start() {
-        healthSystem = GetComponent<HealthSystem>();
+        HealthSystem = GetComponent<HealthSystem>();
         stockSystem = transform.Find("echoesStock").GetComponent<StockSystem>();
         discartStackSystem = transform.Find("discartStack").GetComponent<DiscartStackSystem>();
 
