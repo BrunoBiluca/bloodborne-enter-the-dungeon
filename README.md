@@ -18,3 +18,11 @@ Criação do sistema de pilha das cartas descartadas
 Para cada carta utilizada pelo caçador, quando este já foi utilizada ela vai direto para a pilha de descarte
 
 ![](Docs/discart_stack.PNG)
+
+- Dia 4
+
+Criação do sistema de ataque do monstro
+
+Agora quando o caçador recebe um dano fatal este perde todos os seus echoes de sangue.
+
+![](Docs/monster_attack_turn.PNG)
