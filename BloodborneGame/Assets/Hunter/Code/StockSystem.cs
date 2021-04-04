@@ -1,3 +1,4 @@
+using Assets.UnityFoundation.TimeUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,5 +21,25 @@ public class StockSystem : MonoBehaviour {
                  -0.5f
             );
         }
+    }
+
+    public void RemoveAll() {
+        StartCoroutine(RemoveEchoes());
+    }
+
+    private IEnumerator RemoveEchoes() {
+
+        var echoes = new List<GameObject>();
+
+        foreach(Transform child in transform) {
+            if(child.CompareTag(Tags.echoes))
+                echoes.Add(child.gameObject);
+        }
+
+        foreach(var echo in echoes) {
+            Destroy(echo);
+            yield return WaittingCoroutine.RealSeconds(.1f);
+        }
+        count = 0;
     }
 }

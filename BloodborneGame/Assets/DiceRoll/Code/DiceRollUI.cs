@@ -6,16 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DiceRollUI : MonoBehaviour {
-
-    public static DiceRollUI Instance { get; private set; }
+public class DiceRollUI : Singleton<DiceRollUI> {
 
     private Transform diceUI;
     private GameObject blurLayer;
 
-    void Awake() {
-        Instance = this;
-
+    protected override void OnAwake() {
         diceUI = transform.Find("dice");
         blurLayer = transform.Find("blurLayer").gameObject;
 

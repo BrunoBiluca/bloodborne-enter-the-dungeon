@@ -5,13 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackHandler : MonoBehaviour {
-
-    public static EnemyAttackHandler Instance { get; private set; }
-
-    private void Awake() {
-        Instance = this;
-    }
+public class EnemyAttackHandler : Singleton<EnemyAttackHandler> {
 
     public void Handle(DiceSO dice, Action<int> attackFinished) {
         RollDice(

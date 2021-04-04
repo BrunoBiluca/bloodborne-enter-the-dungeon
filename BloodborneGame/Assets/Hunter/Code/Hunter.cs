@@ -19,6 +19,11 @@ public class Hunter : MonoBehaviour {
         discartStackSystem = transform.Find("discartStack").GetComponent<DiscartStackSystem>();
 
         CurrentCard = Optional<HunterCardSO>.None();
+
+        HealthSystem.OnDied += (sender, args) => {
+            stockSystem.RemoveAll();
+            DiscartCard();
+        };
     }
 
     public void AddEchoes(int amount) {

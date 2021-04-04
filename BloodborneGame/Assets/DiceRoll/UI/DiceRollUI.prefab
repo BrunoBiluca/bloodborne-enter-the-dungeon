@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8044738947177827401}
+  - component: {fileID: 1216284023}
+  - component: {fileID: 1216284022}
   m_Layer: 0
   m_Name: hunterMark
   m_TagString: Untagged
@@ -35,6 +37,41 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 4.25, y: 5.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1216284023
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044738947177827406}
+  m_CullTransparentMesh: 1
+--- !u!114 &1216284022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044738947177827406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: b524ae20118379c48bd84b81b28bec48, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &8044738947591625615
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a27d6ba7de0dce47a7e62ef933c8ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnLoad: 0
 --- !u!1 &8044738947997932010
 GameObject:
   m_ObjectHideFlags: 0

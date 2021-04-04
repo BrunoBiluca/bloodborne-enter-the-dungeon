@@ -3,13 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiceRollManager : MonoBehaviour {
-    public static DiceRollManager Instance { get; private set; }
-
-    public void Awake() {
-        Instance = this;
-    }
-
+public class DiceRollManager : Singleton<DiceRollManager> {
     public DiceSideSO Roll(DiceSO dice) {
         var selectedIndex = UnityEngine.Random.Range(0, dice.SidesCount);
         var selectedSide = dice.sides[selectedIndex];
