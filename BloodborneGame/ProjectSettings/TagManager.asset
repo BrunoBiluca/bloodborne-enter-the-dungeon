@@ -7,6 +7,7 @@ TagManager:
   - hunter
   - echoes
   - enemy
+  - hunter_card
   layers:
   - Default
   - TransparentFX

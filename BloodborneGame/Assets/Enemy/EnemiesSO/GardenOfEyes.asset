@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GardenOfEyes
   m_EditorClassIdentifier: 
   enemyPicture: {fileID: 2100000, guid: 2206de17e3517a948b6535dd8a03adcc, type: 2}
-  enemyCardPrefab: {fileID: 7304246396129163227, guid: 0605dba2b2cdcde47b0a339fb986d23b, type: 3}
+  enemyCardPrefab: {fileID: 7304246396129163227, guid: d3cf8f2878f481044a8eba782c863b11, type: 3}
   enemyName: Jardim de olhos
   isBoss: 0
   description: 

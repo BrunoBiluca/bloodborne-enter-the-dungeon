@@ -4,12 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : BaseGameManager {
+
     protected override void OnAwake() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
 }

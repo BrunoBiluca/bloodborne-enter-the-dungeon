@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01e132d0f5b873d4bb2de66acf93be9b, type: 3}
-  m_Name: CainhurstBloodyCrow
+  m_Name: BeastPatient
   m_EditorClassIdentifier: 
-  enemyPicture: {fileID: 2100000, guid: 0960d6e80b5263644a05314a9c280e71, type: 2}
+  enemyPicture: {fileID: 2100000, guid: 92a314f9cde237f4581bab18e48db47f, type: 2}
   enemyCardPrefab: {fileID: 7304246396129163227, guid: d3cf8f2878f481044a8eba782c863b11, type: 3}
-  enemyName: Cainhurst Bloody Crow
+  enemyName: Beast patient
   isBoss: 0
-  description: 
-  echoesCounter: 6
-  lantern: {fileID: 11400000, guid: 97cd514d97f22d444a92dfcabdcda012, type: 2}
+  description: "Ao revelar - Cada ca\xE7ador leva 1 de dano."
+  echoesCounter: 4
+  lantern: {fileID: 11400000, guid: 2262156e1954d714cb1c3ad66d09e6b9, type: 2}
+  parameters:
+  - key: damage
+    value: 1
+  effect: {fileID: 170485770387078902, guid: 854027076eb7e434cbb79e1b1950e3fa, type: 3}

@@ -10,4 +10,6 @@ public interface IEnemy {
     public void Attack(Action attackFinished);
 
     public void Damage(int amount, Action<int> damageFinished);
+
+    public EnemyEffect GetEffect();
 }

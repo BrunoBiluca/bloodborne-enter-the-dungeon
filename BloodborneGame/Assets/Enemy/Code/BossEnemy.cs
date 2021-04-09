@@ -1,8 +1,5 @@
 using Assets.UnityFoundation.HealthSystem;
-using Assets.UnityFoundation.TimeUtils;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +12,7 @@ public class BossEnemy : MonoBehaviour, IEnemy {
     private TMP_Text echoesCount;
     private SpriteRenderer lanternIcon;
     private HealthSystem healthSystem;
+    private EnemyEffect effect;
 
     public void Setup(EnemySO enemySO) {
         this.enemySO = enemySO;
@@ -42,6 +40,11 @@ public class BossEnemy : MonoBehaviour, IEnemy {
 
         healthSystem = GetComponent<HealthSystem>();
         healthSystem.Setup(enemySO.echoesCounter);
+
+        if(enemySO.effect != null) {
+            effect = (EnemyEffect)gameObject.AddComponent(enemySO.effect.GetType());
+            effect.Parameters = enemySO.parameters;
+        }
     }
 
     public void Attack(Action attackFinished) {
@@ -53,5 +56,9 @@ public class BossEnemy : MonoBehaviour, IEnemy {
     public void Damage(int amount, Action<int> damageFinished) {
         healthSystem.Damage(amount);
         damageFinished(amount);
+    }
+
+    public EnemyEffect GetEffect() {
+        return effect;
     }
 }

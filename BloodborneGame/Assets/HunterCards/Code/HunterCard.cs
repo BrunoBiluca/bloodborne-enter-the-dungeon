@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class HunterCard : MonoBehaviour {
 
+    public HunterCardSO HunterCardSOHolder { get; private set; }
+
     public void Setup(HunterCardSO hunterCardSO) {
+        HunterCardSOHolder = hunterCardSO;
 
         var front = transform.Find("front");
 

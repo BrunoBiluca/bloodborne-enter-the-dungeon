@@ -1,10 +1,5 @@
-using Assets.UnityFoundation.GameManagers;
 using Assets.UnityFoundation.HealthSystem;
-using Assets.UnityFoundation.TimeUtils;
-using JetBrains.Annotations;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -18,6 +13,8 @@ public class Enemy : MonoBehaviour, IEnemy {
     private SpriteRenderer lanternIcon;
 
     private HealthSystem healthSystem;
+
+    public EnemyEffect effect;
 
     public void Setup(EnemySO enemySO) {
         this.enemySO = enemySO;
@@ -45,6 +42,11 @@ public class Enemy : MonoBehaviour, IEnemy {
 
         healthSystem = GetComponent<HealthSystem>();
         healthSystem.Setup(enemySO.echoesCounter);
+
+        if(enemySO.effect != null) {
+            effect = (EnemyEffect)gameObject.AddComponent(enemySO.effect.GetType());
+            effect.Parameters = enemySO.parameters;
+        }
     }
 
     public void Attack(Action attackFinished) {
@@ -60,5 +62,9 @@ public class Enemy : MonoBehaviour, IEnemy {
 
         healthSystem.Damage(damageAmount);
         damageFinished(damageAmount);
+    }
+
+    public EnemyEffect GetEffect() {
+        return effect;
     }
 }

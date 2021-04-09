@@ -14,4 +14,6 @@ public class EnemySO : ScriptableObject {
     public int echoesCounter;
     public DiceSO lantern;
 
+    public List<EnemyEffectParameter> parameters;
+    public EnemyEffect effect;
 }

@@ -5,11 +5,24 @@ using UnityEngine.UI;
 
 public class PlayerChooseCardsDemoManager : MonoBehaviour {
 
-    [SerializeField] private Button executeTurnButton;
+    [SerializeField] private Button enableCardSelectionButton;
+    [SerializeField] private Button confirmCardSelectionButton;
+
+    private List<Hunter> hunters;
 
     void Start() {
-        executeTurnButton.onClick.AddListener(() => { 
+        var huntersGO = GameObject.FindGameObjectsWithTag(Tags.hunter);
+        hunters = new List<Hunter>();
+        foreach(var hunter in huntersGO) {
+            hunters.Add(hunter.GetComponent<Hunter>());
+        }
 
+        enableCardSelectionButton.onClick.AddListener(() => {
+            new EnabledCardSelectionTurn(hunters).Execute();
+        });
+
+        confirmCardSelectionButton.onClick.AddListener(() => {
+            new ConfirmCardSelectionTurn(hunters).Execute();
         });
     }
 }

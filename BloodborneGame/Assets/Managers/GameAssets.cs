@@ -17,6 +17,8 @@ public class GameAssets : MonoBehaviour {
 
     public GameObject echoesPrefab;
 
+    public GameObject enemyCardOnlyCover;
+
     private void Awake() {
         Instance = this;
     }

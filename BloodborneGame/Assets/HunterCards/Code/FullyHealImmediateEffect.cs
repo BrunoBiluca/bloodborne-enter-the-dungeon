@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FullyHealImmediateEffect : CardEffect, IImmediateEffect {
+
     public override CardEffectType EffectType() {
         return CardEffectType.immediateEffect;
     }
@@ -17,7 +18,6 @@ public class FullyHealImmediateEffect : CardEffect, IImmediateEffect {
     }
 
     public void Handle() {
-        
     }
 
 }
