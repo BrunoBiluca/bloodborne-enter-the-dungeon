@@ -67,4 +67,8 @@ public class Enemy : MonoBehaviour, IEnemy {
     public EnemyEffect GetEffect() {
         return effect;
     }
+
+    public EnemySO GetEnemySO() {
+        return enemySO;
+    }
 }

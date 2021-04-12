@@ -26,3 +26,11 @@ Criação do sistema de ataque do monstro
 Agora quando o caçador recebe um dano fatal este perde todos os seus echoes de sangue.
 
 ![](Docs/monster_attack_turn.PNG)
+
+- Dia 5
+
+Criação do sistema de turnos quando o monstro escapa
+
+Agora quando os caçadores não conseguem matar o monstro na rodada este escapa
+
+![](Docs/monster_escape_turn.PNG)

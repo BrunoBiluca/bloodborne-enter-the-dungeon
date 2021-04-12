@@ -16,7 +16,7 @@ public class RevealMonsterDemoManager : MonoBehaviour {
         }
 
         setupMonsterDeckButton.onClick.AddListener(() => {
-            MonsterDeckManager.Instance.Setup();
+            EnemyDeckManager.Instance.Setup();
         });
 
         revealMonsterButton.onClick.AddListener(() => {

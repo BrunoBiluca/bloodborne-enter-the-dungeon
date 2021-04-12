@@ -9,10 +9,8 @@ public class RevealMonsterTurn : ITurn {
     }
 
     public void Execute() {
-        var enemy = MonsterDeckManager.Instance.RevealMonster();
-        Debug.Log("asdfsdfsd");
+        var enemy = EnemyDeckManager.Instance.RevealMonster();
         var enemyEffect = enemy.GetEffect();
-        Debug.Log(enemyEffect);
         if(enemyEffect is IWhenRevealEffect effect) {
 
             if(effect is DamageWhenRevealEffect ef) {

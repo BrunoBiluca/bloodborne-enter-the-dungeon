@@ -40,4 +40,11 @@ public class EnemySpawner : Singleton<EnemySpawner> {
 
         return enemy;
     }
+
+    public void RemoveEnemy() {
+        if(cardSpawnReference.childCount == 0) return;
+        
+        Destroy(cardSpawnReference.GetChild(0).gameObject);
+    }
+
 }

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e132d0f5b873d4bb2de66acf93be9b, type: 3}
+  m_Name: RabidDog
+  m_EditorClassIdentifier: 
+  enemyPicture: {fileID: 2100000, guid: 229d929f325171944880c349eb659a3f, type: 2}
+  enemyCardPrefab: {fileID: 7304246396129163227, guid: d3cf8f2878f481044a8eba782c863b11, type: 3}
+  enemyName: Rabid Dog
+  isBoss: 0
+  description: "Se escapar - Cada ca\xE7ador leva 2 de dano"
+  echoesCounter: 5
+  lantern: {fileID: 11400000, guid: 4895ab491d2cf5343b12cd22b0480410, type: 2}
+  parameters:
+  - key: damage
+    value: 2
+  effect: {fileID: 6031935708540639530, guid: 480ae391173430642b9b183779a10b15, type: 3}
