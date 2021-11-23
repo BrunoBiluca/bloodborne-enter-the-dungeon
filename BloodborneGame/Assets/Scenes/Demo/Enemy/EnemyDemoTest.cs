@@ -28,7 +28,7 @@ public class EnemyDemoTest : MonoBehaviour
                 return;
             }
 
-            enemyCard.GetComponent<IEnemy>().Attack(() => {
+            enemyCard.GetComponent<EnemyBase>().Attack((damage) => {
                 Debug.Log("Attack done");
             });
         });
@@ -41,7 +41,7 @@ public class EnemyDemoTest : MonoBehaviour
                 return;
             }
 
-            enemyCard.GetComponent<IEnemy>().Damage(1, (damage) => {
+            enemyCard.GetComponent<EnemyBase>().Damage(1, (damage) => {
                 Debug.Log("Damage finished");
             });
         });

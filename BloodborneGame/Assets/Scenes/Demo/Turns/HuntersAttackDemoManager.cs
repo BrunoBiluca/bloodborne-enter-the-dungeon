@@ -1,3 +1,4 @@
+using Assets.UnityFoundation.Code.Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,7 @@ public class HuntersAttackDemoManager : MonoBehaviour
             var enemy = EnemySpawner.Instance.GetEnemy();
             if(enemy == null) return;
 
-            new HuntersAttackTurn(enemy, new List<Hunter>() { hunter }).Execute();
+            new HuntersAttackTurn(Optional<EnemyBase>.Some(enemy), new List<Hunter>() { hunter }).Execute();
         });
     }
 }

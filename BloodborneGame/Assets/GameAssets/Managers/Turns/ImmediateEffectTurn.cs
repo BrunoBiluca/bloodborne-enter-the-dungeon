@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
+﻿using Assets.UnityFoundation.Code.Common;
+using System.Collections.Generic;
 
 internal class ImmediateEffectTurn : ITurn
 {
-    private IEnemy enemy;
+    private Optional<EnemyBase> enemy;
     private List<Hunter> hunters;
 
-    public ImmediateEffectTurn(IEnemy enemy, List<Hunter> hunters)
+    public ImmediateEffectTurn(Optional<EnemyBase> enemy, List<Hunter> hunters)
     {
         this.enemy = enemy;
         this.hunters = hunters;
@@ -23,7 +22,14 @@ internal class ImmediateEffectTurn : ITurn
 
                 if(currentCard.effect is DamageImmediateEffect)
                 {
-                    ResolveDamageImmediateEffect(currentCard.damage, hunter, currentCard.effect);
+                    enemy.Some(e => {
+                        ResolveDamageImmediateEffect(
+                            e,
+                            currentCard.damage,
+                            hunter,
+                            currentCard.effect
+                        );
+                    });
                 }
 
                 if(currentCard.effect is FullyHealImmediateEffect)
@@ -42,9 +48,14 @@ internal class ImmediateEffectTurn : ITurn
     }
 
     private void ResolveDamageImmediateEffect(
-        int damage, Hunter hunter, CardEffect effect
+        EnemyBase enemy, int damage, Hunter hunter, CardEffect effect
     )
     {
-        ((DamageImmediateEffect)effect).Setup(damage, hunter).Handle();
+        ((DamageImmediateEffect)effect).Setup(enemy, damage, hunter).Handle();
+    }
+
+    public bool IsTurnFinished()
+    {
+        return true;
     }
 }

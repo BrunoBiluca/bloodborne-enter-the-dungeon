@@ -1,20 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MonsterAttackTurn : ITurn
 {
+    private readonly GameManager gameManager;
+    private bool finishedAttack = false;
+
+    public MonsterAttackTurn(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
 
     public void Execute()
     {
-        var hunters = GameObject.FindGameObjectsWithTag(Tags.hunter);
-        var enemies = GameObject.FindGameObjectsWithTag(Tags.enemy);
+        finishedAttack = false;
 
-        foreach(var enemy in enemies)
+        if(!gameManager.CurrentEnemy.IsPresentAndGet(out EnemyBase enemy))
         {
-            enemy.GetComponent<IEnemy>().Attack(() => {
+            finishedAttack = true;
+            return;
+        }   
 
-            });
-        }
+        enemy.Attack(damage => {
+            gameManager.GetAliveHunters()
+                .ForEach(h => h.HealthSystem.Damage(damage));
+
+            finishedAttack = true;
+        });
+    }
+
+    public bool IsTurnFinished()
+    {
+        return finishedAttack;
     }
 }

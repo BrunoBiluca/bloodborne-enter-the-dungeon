@@ -1,6 +1,5 @@
 using Assets.UnityFoundation.Code.Common;
 using Assets.UnityFoundation.GameManagers;
-using Assets.UnityFoundation.Systems.HealthSystem;
 using System;
 using UnityEngine;
 
@@ -16,12 +15,6 @@ public class EnemyAttackHandler : Singleton<EnemyAttackHandler>
                 if(BaseGameManager.Instance.DebugMode)
                 {
                     Debug.Log($"Total damage: {totalDamage}");
-                }
-
-                var hunters = GameObject.FindGameObjectsWithTag(Tags.hunter);
-                foreach(var hunter in hunters)
-                {
-                    hunter.GetComponent<HealthSystem>().Damage(totalDamage);
                 }
 
                 attackFinished(totalDamage);

@@ -23,7 +23,6 @@ public class RevealMonsterDemoManager : MonoBehaviour
         });
 
         revealMonsterButton.onClick.AddListener(() => {
-            new RevealMonsterTurn(hunters).Execute();
         });
     }
 }

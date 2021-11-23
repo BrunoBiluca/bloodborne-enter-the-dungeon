@@ -1,18 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class DamageImmediateEffect : CardEffect, IImmediateEffect
 {
-
+    private EnemyBase enemy;
     public int damage;
     public Hunter hunter;
     public List<Hunter> hunters;
 
-    public DamageImmediateEffect Setup(int damage, Hunter hunter)
+    public DamageImmediateEffect Setup(EnemyBase enemy, int damage, Hunter hunter)
     {
-
+        this.enemy = enemy;
         this.damage = damage;
         this.hunter = hunter;
 
@@ -21,17 +19,12 @@ public class DamageImmediateEffect : CardEffect, IImmediateEffect
 
     public void Handle()
     {
-        var enemies = GameObject.FindGameObjectsWithTag(Tags.enemy);
-
-        foreach(var enemy in enemies)
-        {
-            enemy.GetComponent<IEnemy>().Damage(
-                damage,
-                (totalDamage) => {
-                    hunter.AddEchoes(totalDamage);
-                }
-            );
-        }
+        enemy.Damage(
+            damage,
+            (totalDamage) => {
+                hunter.AddEchoes(totalDamage);
+            }
+        );
     }
 
     public override CardEffectType EffectType()

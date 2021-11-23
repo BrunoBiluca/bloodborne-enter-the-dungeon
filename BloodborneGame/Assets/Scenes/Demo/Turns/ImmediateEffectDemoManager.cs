@@ -1,3 +1,4 @@
+using Assets.UnityFoundation.Code.Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,13 +19,15 @@ public class ImmediateEffectDemoManager : MonoBehaviour
             EnemySpawner.Instance.SpawnRandomEnemy();
         });
         playerChooseCardButton.onClick.AddListener(() => {
-            hunter.ChooseCard(HunterCardDeck.Instance.GetRandomCard());
+            hunter.ChooseCard(0);
         });
         executeTurnButton.onClick.AddListener(() => {
             var enemy = EnemySpawner.Instance.GetEnemy();
             if(enemy == null) return;
 
-            new ImmediateEffectTurn(enemy, new List<Hunter>() { hunter }).Execute();
+            new ImmediateEffectTurn(
+                Optional<EnemyBase>.Some(enemy), new List<Hunter>() { hunter }
+            ).Execute();
         });
     }
 }

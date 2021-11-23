@@ -3,19 +3,17 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class BossEnemy : MonoBehaviour, IEnemy
+public class BossEnemy : EnemyBase
 {
-
     private EnemySO enemySO;
 
     private TMP_Text nameText;
     private TMP_Text descriptionText;
     private TMP_Text echoesCount;
     private SpriteRenderer lanternIcon;
-    private HealthSystem healthSystem;
     private EnemyEffect effect;
 
-    public void Setup(EnemySO enemySO)
+    public override void Setup(EnemySO enemySO)
     {
         this.enemySO = enemySO;
 
@@ -43,8 +41,7 @@ public class BossEnemy : MonoBehaviour, IEnemy
         lanternIcon = frontFace.Find("lanternIcon").GetComponent<SpriteRenderer>();
         lanternIcon.sprite = enemySO.lantern.lanternSprite;
 
-        healthSystem = GetComponent<HealthSystem>();
-        healthSystem.Setup(enemySO.echoesCounter);
+        HealthSystem.Setup(enemySO.echoesCounter);
 
         if(enemySO.effect != null)
         {
@@ -53,25 +50,24 @@ public class BossEnemy : MonoBehaviour, IEnemy
         }
     }
 
-    public void Attack(Action attackFinished)
+    public override void Attack(Action<int> attackFinished)
     {
-        EnemyAttackHandler.Instance.Handle(enemySO.lantern, (totalDamage) => {
-            attackFinished();
-        });
+        EnemyAttackHandler.Instance
+            .Handle(enemySO.lantern, (totalDamage) => attackFinished(totalDamage));
     }
 
-    public void Damage(int amount, Action<int> damageFinished)
+    public override void Damage(int amount, Action<int> damageFinished)
     {
-        healthSystem.Damage(amount);
+        HealthSystem.Damage(amount);
         damageFinished(amount);
     }
 
-    public EnemyEffect GetEffect()
+    public override EnemyEffect GetEffect()
     {
         return effect;
     }
 
-    public EnemySO GetEnemySO()
+    public override EnemySO GetEnemySO()
     {
         return enemySO;
     }

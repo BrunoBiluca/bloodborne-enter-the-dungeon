@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb743429d32566a48bdf1514cf964cff, type: 3}
+  m_Name: hunter_card_list_so
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 11400000, guid: a4043d52144826847972a168d34d7610, type: 2}
+  - {fileID: 11400000, guid: 286454bfdd1ec4c4096571f2df346cb0, type: 2}
+  - {fileID: 11400000, guid: 368fef17e46476244bdca3dc249897ad, type: 2}
+  - {fileID: 11400000, guid: e6d67eb381742454ea6658759053a8f5, type: 2}
+  - {fileID: 11400000, guid: 8cf20f76eb9e42b4c872a15ed70ef3fd, type: 2}
+  - {fileID: 11400000, guid: a9af3659831acbc4fb7a39b5331df8f5, type: 2}
+  - {fileID: 11400000, guid: 52753fb0c69c5be4080af256db9e4740, type: 2}

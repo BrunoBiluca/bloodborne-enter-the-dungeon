@@ -1,11 +1,10 @@
+using Assets.UnityFoundation.Code;
 using Assets.UnityFoundation.Code.Common;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HunterCardsUI : Singleton<HunterCardsUI>
 {
-
-    private Camera mainCamera;
     private Transform hunterCardsHolder;
 
     private Hunter hunter;
@@ -15,8 +14,11 @@ public class HunterCardsUI : Singleton<HunterCardsUI>
     {
         base.OnAwake();
 
-        mainCamera = Camera.main;
-        hunterCardsHolder = transform.Find("hunterCardsHolder");
+        var canvas = GetComponent<Canvas>();
+        if(canvas.worldCamera == null)
+            canvas.worldCamera = Camera.main;
+
+        hunterCardsHolder = transform.Find("hunter_cards_holder");
         Hide();
     }
 
@@ -24,21 +26,24 @@ public class HunterCardsUI : Singleton<HunterCardsUI>
     {
         gameObject.SetActive(true);
 
-        var cardOffset = 100;
-        var mostLeftCardOffset = -50 * (hunterHand.AvailableCards.Count - 1);
+        var cardOffset = 200;
+        var mostLeftCardOffset = -100 * (hunterHand.AvailableCards.Count - 1);
 
+        TransformUtils.RemoveChildObjects(hunterCardsHolder);
+
+        var index = 0;
         foreach(var card in hunterHand.AvailableCards)
         {
             var cardGO = Instantiate(card.HunterCard.cardPrefab, hunterCardsHolder);
-            cardGO.name = card.Index.ToString();
+            cardGO.name = (index++).ToString();
             Destroy(cardGO.GetComponent<Rigidbody>());
 
             cardGO.GetComponent<HunterCard>().Setup(card.HunterCard);
-            cardGO.transform.localPosition = new Vector3(mostLeftCardOffset, 0, 0);
+            cardGO.transform.localPosition = new Vector3(mostLeftCardOffset, 0, -0.5f);
             mostLeftCardOffset += cardOffset;
 
             cardGO.transform.localRotation = Quaternion.Euler(-90, 0, 0);
-            cardGO.transform.localScale = new Vector3(10, 1, 10);
+            cardGO.transform.localScale = new Vector3(20, 1, 20);
         }
 
         this.hunterHand = hunterHand;
@@ -67,17 +72,15 @@ public class HunterCardsUI : Singleton<HunterCardsUI>
     {
         if(Input.GetMouseButtonDown(0))
         {
-            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-            if(Physics.Raycast(ray, out RaycastHit hit))
+            if(PhysicsUtils.RaycastType(
+                    Input.mousePosition,
+                    out HunterCard hunterCard,
+                    LayerMask.NameToLayer("UI")
+                ))
             {
-                if(hit.transform.gameObject.TryGetComponent(out HunterCard hunterCard))
-                {
-                    Debug.Log(hit.transform.name);
-                    hunter.ChooseCard(int.Parse(hit.transform.name));
-                }
-                Hide();
+                hunter.ChooseCard(int.Parse(hunterCard.name));
             }
+            Hide();
         }
     }
 }

@@ -1,16 +1,18 @@
+using Assets.UnityFoundation.Code.Common;
 using Assets.UnityFoundation.Systems.HealthSystem;
 using System;
 using UnityEngine;
 
 public class Hunter : MonoBehaviour
 {
-    private Transform hunterCardReferencePoint;
+    public bool IsDead { get; private set; }
     public Optional<HunterCardSO> CurrentCard { get; private set; }
 
     public HealthSystem HealthSystem { get; private set; }
     private StockSystem stockSystem;
     private DiscartStackSystem discartStackSystem;
 
+    private Transform hunterCardReferencePoint;
     private Transform hunterHandTransform;
     private HunterHand hunterHand;
 
@@ -21,19 +23,24 @@ public class Hunter : MonoBehaviour
 
     void Start()
     {
-        HealthSystem = GetComponent<HealthSystem>();
         stockSystem = transform.Find("echoesStock").GetComponent<StockSystem>();
         discartStackSystem = transform.Find("discartStack").GetComponent<DiscartStackSystem>();
 
         CurrentCard = Optional<HunterCardSO>.None();
 
+        HealthSystem = GetComponent<HealthSystem>();
+        HealthSystem.SetDestroyHealthbar(false);
+        HealthSystem.SetDestroyOnDied(false);
         HealthSystem.OnDied += (sender, args) => {
+            IsDead = true;
             stockSystem.RemoveAll();
             DiscartCard();
+
+            gameObject.SetActive(false);
         };
 
-        hunterHandTransform = transform.Find("hunterHand");
-        hunterHand = hunterHandTransform.GetComponent<HunterHand>();
+        hunterHandTransform = transform.Find("hunter_hand");
+        hunterHand = hunterHandTransform.GetComponent<HunterHand>().Setup(this);
         DisabledCardSelection();
     }
 
@@ -47,10 +54,14 @@ public class Hunter : MonoBehaviour
         hunterHandTransform.gameObject.SetActive(false);
     }
 
-
     public void AddEchoes(int amount)
     {
         stockSystem.Add(amount);
+    }
+
+    public void AddCardToHand(HunterCardSO hunterCardSO)
+    {
+        hunterHand.AddCard(hunterCardSO);
     }
 
     public void ChooseCard(HunterCardSO card)

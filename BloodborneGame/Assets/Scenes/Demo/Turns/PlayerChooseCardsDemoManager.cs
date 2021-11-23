@@ -21,11 +21,7 @@ public class PlayerChooseCardsDemoManager : MonoBehaviour
         }
 
         enableCardSelectionButton.onClick.AddListener(() => {
-            new EnabledCardSelectionTurn(hunters).Execute();
-        });
-
-        confirmCardSelectionButton.onClick.AddListener(() => {
-            new ConfirmCardSelectionTurn(hunters).Execute();
+            new HuntersChooseCardsTurn(hunters).Execute();
         });
     }
 }

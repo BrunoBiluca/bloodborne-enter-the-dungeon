@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4b11b5fbd3c0d4793b3a30b2f213ed, type: 3}
+  m_Name: ludwig_rifle_so
+  m_EditorClassIdentifier: 
+  cardName: Ludwig rifle
+  damage: 3
+  effectDescription: 
+  isInitialCard: 0
+  cardPicture: {fileID: 2100000, guid: 00dfca797599d4a48a1d7928939d274c, type: 2}
+  cardPrefab: {fileID: 4297651275368728053, guid: 57d67a4446b41274bb559620f000ba5b, type: 3}
+  effect: {fileID: 1304063162073638264, guid: 00a7061f827573e43a3ffccc21fa3558, type: 3}

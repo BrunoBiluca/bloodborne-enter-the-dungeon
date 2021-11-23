@@ -32,8 +32,7 @@ public class EnemyHealth : MonoBehaviour, IHealthBar
 
     public void SetCurrentHealth(float currentHealth)
     {
-        if(currentHealth == 0) return;
-
+        currentHealth = currentHealth < 0f ? 0f : currentHealth;
         var removeEchoesList = new List<int>();
 
         var removeEchoes = transform.childCount - (int)currentHealth;

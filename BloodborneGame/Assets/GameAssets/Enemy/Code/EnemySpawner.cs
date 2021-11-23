@@ -12,25 +12,26 @@ public class EnemySpawner : Singleton<EnemySpawner>
     {
         base.OnAwake();
 
-        availableEnemies = Resources.Load<EnemyListSO>("AllEnemies");
+        availableEnemies = Resources.Load<EnemyListSO>("all_enemies_so");
 
         if(cardSpawnReference == null) cardSpawnReference = transform;
     }
 
-    public IEnemy SpawnRandomEnemy()
+    public EnemyBase SpawnRandomEnemy()
     {
-        var enemySO = availableEnemies.enemies[Random.Range(0, availableEnemies.enemies.Count)];
+        int randomIdx = Random.Range(0, availableEnemies.enemies.Count);
+        var enemySO = availableEnemies.enemies[randomIdx];
         return InstantiateEnemy(enemySO);
     }
 
-    public IEnemy GetEnemy()
+    public EnemyBase GetEnemy()
     {
         if(cardSpawnReference.childCount == 0) return null;
 
-        return cardSpawnReference.GetChild(0).gameObject.GetComponent<IEnemy>();
+        return cardSpawnReference.GetChild(0).gameObject.GetComponent<EnemyBase>();
     }
 
-    public IEnemy InstantiateEnemy(EnemySO enemySO)
+    public EnemyBase InstantiateEnemy(EnemySO enemySO)
     {
         if(cardSpawnReference.childCount > 0)
             Destroy(cardSpawnReference.GetChild(0).gameObject);
@@ -39,7 +40,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
             enemySO.enemyCardPrefab,
             cardSpawnReference
         );
-        IEnemy enemy = enemyCard.GetComponent<IEnemy>();
+        EnemyBase enemy = enemyCard.GetComponent<EnemyBase>();
         enemy.Setup(enemySO);
 
         return enemy;

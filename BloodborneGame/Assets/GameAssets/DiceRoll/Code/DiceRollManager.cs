@@ -1,8 +1,6 @@
 using Assets.UnityFoundation.Code.Common;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class DiceRollManager : Singleton<DiceRollManager>
 {

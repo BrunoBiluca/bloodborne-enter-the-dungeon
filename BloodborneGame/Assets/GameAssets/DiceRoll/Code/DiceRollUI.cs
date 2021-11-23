@@ -1,8 +1,6 @@
 using Assets.UnityFoundation.Code.Common;
 using Assets.UnityFoundation.TimeUtils;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +22,7 @@ public class DiceRollUI : Singleton<DiceRollUI>
     public IEnumerator Roll(DiceSO dice, DiceSideSO result)
     {
         gameObject.SetActive(true);
-        blurLayer.SetActive(true);
+        //blurLayer.SetActive(true);
         yield return RollAnimation(dice, result);
     }
 
@@ -38,7 +36,7 @@ public class DiceRollUI : Singleton<DiceRollUI>
             yield return WaittingCoroutine.RealSeconds(.1f);
         }
 
-        blurLayer.SetActive(false);
+        //blurLayer.SetActive(false);
         FillUI(dice, result);
         yield return WaittingCoroutine.RealSeconds(2f);
         gameObject.SetActive(false);

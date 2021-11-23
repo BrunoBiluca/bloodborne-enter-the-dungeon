@@ -21,7 +21,7 @@ public class MonsterEscapeDemoManager : MonoBehaviour
 
     void Start()
     {
-        var allEnemies = Resources.Load<EnemyListSO>("AllEnemies");
+        var allEnemies = Resources.Load<EnemyListSO>("all_enemies_so");
 
         commonMonsters.AddRange(allEnemies.enemies.FindAll(e => !e.isBoss));
         bossMonsters.AddRange(allEnemies.enemies.FindAll(e => e.isBoss));
@@ -33,6 +33,9 @@ public class MonsterEscapeDemoManager : MonoBehaviour
                 return false;
             })
         );
+
+        var enemy = GameObject.FindGameObjectWithTag(Tags.enemy)
+            .GetComponent<EnemyBase>();
 
         hunters = GameObject
             .FindGameObjectsWithTag(Tags.hunter)
@@ -59,7 +62,6 @@ public class MonsterEscapeDemoManager : MonoBehaviour
         });
 
         executeTurnButton.onClick.AddListener(() => {
-            new MonsterEscapeTurn(hunters).Execute();
         });
     }
 }

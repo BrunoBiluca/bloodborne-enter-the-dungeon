@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DiscartStackDemoManager : MonoBehaviour
 {
-
+    [SerializeField] private Button addCardToHunterHand;
     [SerializeField] private Button playerChooseCard;
     [SerializeField] private Button discartChosenCard;
 
@@ -13,8 +13,12 @@ public class DiscartStackDemoManager : MonoBehaviour
 
     void Start()
     {
+        addCardToHunterHand.onClick.AddListener(() => {
+            hunter.AddCardToHand(HunterCardDeck.Instance.GetRandomCard());
+        });
+
         playerChooseCard.onClick.AddListener(() => {
-            hunter.ChooseCard(HunterCardDeck.Instance.GetRandomCard());
+            hunter.ChooseCard(0);
         });
 
         discartChosenCard.onClick.AddListener(() => {

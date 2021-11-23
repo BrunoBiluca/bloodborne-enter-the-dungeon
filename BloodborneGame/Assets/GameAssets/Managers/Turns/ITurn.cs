@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface ITurn
 {
-
     public void Execute();
-
+    bool IsTurnFinished();
 }
