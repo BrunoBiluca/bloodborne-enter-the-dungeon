@@ -24,7 +24,9 @@ public class HunterCard : MonoBehaviour
                 .GetComponent<TextMeshPro>().text = hunterCardSO.damage.ToString();
         }
 
-        front.Find("initialCard").gameObject.SetActive(hunterCardSO.isInitialCard);
+        var initialCardText = front.Find("initialCard");
+        if(initialCardText != null)
+            initialCardText.gameObject.SetActive(hunterCardSO.isInitialCard);
 
         if(hunterCardSO.effect != null)
         {

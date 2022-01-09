@@ -1,6 +1,3 @@
-using Assets.UnityFoundation.Code.Common;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,9 +22,7 @@ public class ImmediateEffectDemoManager : MonoBehaviour
             var enemy = EnemySpawner.Instance.GetEnemy();
             if(enemy == null) return;
 
-            new ImmediateEffectTurn(
-                Optional<EnemyBase>.Some(enemy), new List<Hunter>() { hunter }
-            ).Execute();
+            new ImmediateEffectTurn((GameManager)GameManager.Instance).Execute();
         });
     }
 }

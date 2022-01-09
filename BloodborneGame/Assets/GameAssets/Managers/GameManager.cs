@@ -1,8 +1,8 @@
 using Assets.UnityFoundation.Code.Common;
+using Assets.UnityFoundation.Code.TimeUtils;
 using Assets.UnityFoundation.GameManagers;
 using Assets.UnityFoundation.TimeUtils;
 using Assets.UnityFoundation.UI.Menus.GameOverMenu;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +16,11 @@ public class GameManager : BaseGameManager
         set {
             currentEnemy = value;
 
-            if(currentEnemy.IsPresent)
+            if(currentEnemy.IsPresentAndGet(out EnemyBase enemy))
             {
-                currentEnemy.Get().HealthSystem.OnDied += (sender, args) => {
-                    enemyDiscart.Discart(currentEnemy.Get());
+                enemy.HealthSystem.OnDied += (sender, args) => {
+                    enemyDiscart.Discart(enemy);
+                    Destroy(enemy.gameObject);
                     currentEnemy = Optional<EnemyBase>.None();
                };
             }
@@ -33,26 +34,28 @@ public class GameManager : BaseGameManager
     private ITurn currentTurn;
 
     [SerializeField] private GameOverMenu gameOverMenu;
-    private GameCanvasUI gameCanvas;
     private EnemyDeckManager enemyDeck;
     private EnemyDiscartPileManager enemyDiscart;
 
     private bool canChangeTurn = false;
     private int currentRound = 0;
 
+    private float startTime;
+    private Timer updateTimeCanvasTimer;
+
     private void Start()
     {
-        gameCanvas = GameCanvasUI.Instance;
         enemyDeck = EnemyDeckManager.Instance;
         enemyDiscart = EnemyDiscartPileManager.Instance;
 
         gameOverMenu.Setup(
             "Retry",
-            () => StartCoroutine(nameof(GameBoostrap))
+            () => StartCoroutine(GameBoostrap())
         );
 
-        StartCoroutine(nameof(GameBoostrap));
+        StartCoroutine(GameBoostrap());
     }
+    
     private void Update()
     {
         if(!canChangeTurn) return;
@@ -68,7 +71,8 @@ public class GameManager : BaseGameManager
 
         if(currentTurn.GetType() == typeof(RevealMonsterTurn))
         {
-            gameCanvas.UpdateRound(++currentRound);
+            GameTurnsUI.Instance.UpdateRoundCounter(++currentRound);
+            GameTurnsUI.Instance.ChangeTurn(1);
 
             StartCoroutine(ChangeTurn(new HuntersChooseCardsTurn(hunters)));
             return;
@@ -76,37 +80,51 @@ public class GameManager : BaseGameManager
 
         if(currentTurn.GetType() == typeof(HuntersChooseCardsTurn))
         {
-            StartCoroutine(ChangeTurn(new ImmediateEffectTurn(CurrentEnemy, hunters)));
+            GameTurnsUI.Instance.ChangeTurn(2);
+            StartCoroutine(ChangeTurn(new ImmediateEffectTurn(this)));
             return;
         }
 
         if(currentTurn.GetType() == typeof(ImmediateEffectTurn))
         {
+            GameTurnsUI.Instance.ChangeTurn(3);
             StartCoroutine(ChangeTurn(new MonsterAttackTurn(this)));
             return;
         }
 
         if(currentTurn.GetType() == typeof(MonsterAttackTurn))
         {
-            StartCoroutine(ChangeTurn(new HuntersAttackTurn(CurrentEnemy, hunters)));
+            GameTurnsUI.Instance.ChangeTurn(4);
+            StartCoroutine(ChangeTurn(new HuntersAttackTurn(this)));
             return;
         }
 
         if(currentTurn.GetType() == typeof(HuntersAttackTurn))
         {
+            GameTurnsUI.Instance.ChangeTurn(5);
             StartCoroutine(ChangeTurn(new MonsterEscapeTurn(this)));
             return;
         }
 
         if(currentTurn.GetType() == typeof(MonsterEscapeTurn))
         {
+            GameTurnsUI.Instance.ChangeTurn(6);
+            StartCoroutine(
+                ChangeTurn(new HuntersDreamTurn(this, HuntersDreamUI.Instance)
+            ));
+            return;
+        }
+
+        if(currentTurn.GetType() == typeof(HuntersDreamTurn)){
+            GameTurnsUI.Instance.ChangeTurn(0);
             StartCoroutine(ChangeTurn(new RevealMonsterTurn(this, hunters)));
         }
     }
 
     private IEnumerator GameBoostrap()
     {
-        gameCanvas.ChangeTurn("Creating game...");
+        if(DebugMode)
+            Debug.Log("Creating game...");
 
         enemyDeck.Setup();
 
@@ -125,8 +143,18 @@ public class GameManager : BaseGameManager
 
     private void StartGame()
     {
-        gameCanvas.ChangeTurn("Starting game...");
+        if(DebugMode)
+            Debug.Log("Starting game...");
 
+        startTime = Time.time;
+
+        updateTimeCanvasTimer = new Timer(
+            1f, 
+            () => GameTurnsUI.Instance.UpdateTimeCounter(Time.time - startTime)
+        )
+        .Start();
+
+        GameTurnsUI.Instance.ChangeTurn(0);
         StartCoroutine(ChangeTurn(new RevealMonsterTurn(this, hunters)));
 
         currentRound = 0;
@@ -135,7 +163,10 @@ public class GameManager : BaseGameManager
     private IEnumerator ChangeTurn(ITurn turn)
     {
         canChangeTurn = false;
-        gameCanvas.ChangeTurn(turn.GetType().ToString());
+
+        if(DebugMode)
+            Debug.Log(turn.GetType().ToString());
+
         currentTurn = turn;
 
         yield return new WaitForSeconds(2f);

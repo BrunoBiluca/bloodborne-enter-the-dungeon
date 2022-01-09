@@ -18,4 +18,4 @@ MonoBehaviour:
   isInitialCard: 1
   cardPicture: {fileID: 2100000, guid: 40a23f66228fced48827f625404bc92e, type: 2}
   cardPrefab: {fileID: 4297651275368728053, guid: 48769e4910729704e869f3f2cd8280ee, type: 3}
-  effect: {fileID: 0}
+  effect: {fileID: 4331437187618777764, guid: e034c9d10d6b41a42ab357290987be96, type: 3}

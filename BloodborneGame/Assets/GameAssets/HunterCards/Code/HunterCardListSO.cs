@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/HunterCardList")]
 public class HunterCardListSO : ScriptableObject
 {
+    public HunterCardSO huntersDreamCard;
 
     public HunterCardSO[] cards;
 

@@ -2,11 +2,27 @@ using Assets.UnityFoundation.TimeUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Assets.UnityFoundation.Code;
 
 public class StockSystem : MonoBehaviour
 {
-
     private int count;
+
+    public int Count => count;
+
+    private TextMeshProUGUI echoesCountText;
+
+    private Transform echoesHolder;
+
+    private void Awake()
+    {
+        echoesCountText = transform.parent
+            .FindComponent<TextMeshProUGUI>("hunter_canvas.echoes_number.text");
+
+        echoesHolder = transform.Find("echoes_holder");
+        echoesCountText.text = count.ToString();
+    }
 
     public void Add(int amount)
     {
@@ -15,7 +31,7 @@ public class StockSystem : MonoBehaviour
             count++;
             var echoGO = Instantiate(
                 GameAssets.Instance.echoesPrefab,
-                transform
+                echoesHolder
             );
             echoGO.transform.localRotation = Quaternion.Euler(90, 0, 0);
             echoGO.transform.localPosition = new Vector3(
@@ -24,22 +40,32 @@ public class StockSystem : MonoBehaviour
                  -0.5f
             );
         }
+
+        echoesCountText.text = count.ToString();
     }
 
     public void RemoveAll()
     {
-        StartCoroutine(RemoveEchoes());
+        StartCoroutine(RemoveEchoes(count));
     }
 
-    private IEnumerator RemoveEchoes()
+    public void Remove(int amount)
     {
+        StartCoroutine(RemoveEchoes(amount));
+    }
 
+    private IEnumerator RemoveEchoes(int amount)
+    {
         var echoes = new List<GameObject>();
 
-        foreach(Transform child in transform)
+        var removeAmount = 0;
+        foreach(Transform child in echoesHolder)
         {
             if(child.CompareTag(Tags.echoes))
                 echoes.Add(child.gameObject);
+
+            if(++removeAmount == amount)
+                break;
         }
 
         foreach(var echo in echoes)
@@ -47,6 +73,8 @@ public class StockSystem : MonoBehaviour
             Destroy(echo);
             yield return WaittingCoroutine.RealSeconds(.1f);
         }
-        count = 0;
+        count -= amount;
+
+        echoesCountText.text = count.ToString();
     }
 }

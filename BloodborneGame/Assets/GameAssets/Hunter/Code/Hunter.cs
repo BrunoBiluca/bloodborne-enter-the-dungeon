@@ -5,26 +5,28 @@ using UnityEngine;
 
 public class Hunter : MonoBehaviour
 {
-    public bool IsDead { get; private set; }
-    public Optional<HunterCardSO> CurrentCard { get; private set; }
-
-    public HealthSystem HealthSystem { get; private set; }
     private StockSystem stockSystem;
-    private DiscartStackSystem discartStackSystem;
-
     private Transform hunterCardReferencePoint;
     private Transform hunterHandTransform;
     private HunterHand hunterHand;
 
+    public HunterSO hunterConfig;
+    public bool IsDead { get; private set; }
+    public Optional<HunterCardSO> CurrentCard { get; private set; }
+    public HealthSystem HealthSystem { get; private set; }
+    public DiscartStackSystem DiscartStackSystem { get; private set; }
+    public int HunterHandCardsCount => hunterHand.AvailableCards.Count;
+    public int EchoesCount => stockSystem.Count;
+
     private void Awake()
     {
-        hunterCardReferencePoint = transform.Find("hunterCardReference");
+        hunterCardReferencePoint = transform.Find("hunter_card_reference_point");
     }
 
     void Start()
     {
-        stockSystem = transform.Find("echoesStock").GetComponent<StockSystem>();
-        discartStackSystem = transform.Find("discartStack").GetComponent<DiscartStackSystem>();
+        stockSystem = transform.Find("echoes_stock").GetComponent<StockSystem>();
+        DiscartStackSystem = GetComponent<DiscartStackSystem>();
 
         CurrentCard = Optional<HunterCardSO>.None();
 
@@ -39,24 +41,36 @@ public class Hunter : MonoBehaviour
             gameObject.SetActive(false);
         };
 
-        hunterHandTransform = transform.Find("hunter_hand");
-        hunterHand = hunterHandTransform.GetComponent<HunterHand>().Setup(this);
+        hunterHand = GetComponent<HunterHand>().Setup(this);
         DisabledCardSelection();
     }
 
     public void EnabledCardSelection()
     {
-        hunterHandTransform.gameObject.SetActive(true);
+        hunterHand.EnabledCardSelection();
     }
 
     public void DisabledCardSelection()
     {
-        hunterHandTransform.gameObject.SetActive(false);
+        hunterHand.DisabledCardSelection();
+    }
+
+    public void RecoverCards()
+    {
+        foreach(var discartedCard in DiscartStackSystem.RecoverCards())
+        {
+            hunterHand.AddCard(discartedCard);
+        }
     }
 
     public void AddEchoes(int amount)
     {
         stockSystem.Add(amount);
+    }
+
+    public void RemoveEchoes(int amount)
+    {
+        stockSystem.Remove(amount);
     }
 
     public void AddCardToHand(HunterCardSO hunterCardSO)
@@ -78,10 +92,28 @@ public class Hunter : MonoBehaviour
         cardGO.GetComponent<HunterCard>().Setup(card);
     }
 
+    public void ChooseHuntersDreamCard()
+    {
+        ChooseCard(hunterHand.huntersDreamCard);
+        hunterHand.CanGoToHuntersDream = false;
+    }
+
+    public void UpdateCanGoToHuntersDream(){
+        hunterHand.CanGoToHuntersDream = true;
+    }
+
     public void ChooseCard(int cardIndex)
     {
         hunterHand.SetSelectedCard(cardIndex);
         ChooseCard(hunterHand.SelectedCard.HunterCard);
+    }
+
+    public void DiscartHunterDreamCard()
+    {
+        CurrentCard.Some(currentCard => {
+            Destroy(hunterCardReferencePoint.GetChild(0).gameObject);
+            CurrentCard = Optional<HunterCardSO>.None();
+        });
     }
 
     public void DiscartCard()
@@ -89,8 +121,8 @@ public class Hunter : MonoBehaviour
         CurrentCard.Some((currentCard) => {
             Destroy(hunterCardReferencePoint.GetChild(0).gameObject);
 
-            hunterHand.DiscartCard(currentCard);
-            discartStackSystem.DiscartCard(currentCard);
+            hunterHand.DiscartSelectedCard();
+            DiscartStackSystem.DiscartCard(currentCard);
 
             CurrentCard = Optional<HunterCardSO>.None();
         });

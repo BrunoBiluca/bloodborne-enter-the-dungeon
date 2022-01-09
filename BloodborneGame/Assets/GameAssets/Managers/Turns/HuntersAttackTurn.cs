@@ -1,34 +1,53 @@
 using Assets.UnityFoundation.Code.Common;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HuntersAttackTurn : ITurn
 {
+    private readonly GameManager gameManager;
 
-    private readonly Optional<EnemyBase> enemy;
-    private readonly List<Hunter> hunters;
-
-    public HuntersAttackTurn(Optional<EnemyBase> enemy, List<Hunter> hunters)
+    public HuntersAttackTurn(GameManager gameManager)
     {
-        this.enemy = enemy;
-        this.hunters = hunters;
+        this.gameManager = gameManager;
     }
 
     public void Execute()
     {
-        foreach(var hunter in hunters)
+        gameManager.CurrentEnemy.Some(e => {
+            e.HealthSystem.OnDied -= (sender, args) => EnemyDiedHandler(e);
+            e.HealthSystem.OnDied += (sender, args) => EnemyDiedHandler(e);
+        });
+
+        foreach(var hunter in gameManager.GetAliveHunters())
         {
             if(!hunter.CurrentCard.IsPresentAndGet(out HunterCardSO card))
                 continue;
 
-            enemy.Some(e => {
-                e.Damage(
-                    card.damage,
-                    (damageDealt) => hunter.AddEchoes(damageDealt)
-                );
-            });
+            if(card.effect is IAttackEffect)
+            {
+                gameManager
+                    .CurrentEnemy
+                    .Some(e => {
+                        e.Damage(
+                            card.damage,
+                            (damageDealt) => hunter.AddEchoes(damageDealt)
+                        );
+                    });
 
-            hunter.DiscartCard();
+                hunter.DiscartCard();
+            }
+        }
+    }
+
+    private void EnemyDiedHandler(EnemyBase e)
+    {
+        if(e.GetType() != typeof(BossEnemy))
+            return;
+
+        foreach(var hunter in gameManager.GetAliveHunters())
+        {
+            hunter.UpdateCanGoToHuntersDream();
         }
     }
 

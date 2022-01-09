@@ -14,7 +14,7 @@ public class DiscartStackDemoManager : MonoBehaviour
     void Start()
     {
         addCardToHunterHand.onClick.AddListener(() => {
-            hunter.AddCardToHand(HunterCardDeck.Instance.GetRandomCard());
+            hunter.AddCardToHand(HunterCardDeckManager.Instance.GetRandomCard());
         });
 
         playerChooseCard.onClick.AddListener(() => {

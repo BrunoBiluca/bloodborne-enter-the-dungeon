@@ -12,7 +12,14 @@ public class EnemyDeckManager : Singleton<EnemyDeckManager>
     private EnemySO finalBoss;
     private List<EnemySO> monsters;
 
+    private Transform cardsHolder;
+
     public bool IsDeckSetupFinished { get; private set; }
+
+    protected override void OnAwake()
+    {
+        cardsHolder = transform.Find("cards_holder");
+    }
 
     public void Setup(int enemyCount = 7)
     {
@@ -38,13 +45,13 @@ public class EnemyDeckManager : Singleton<EnemyDeckManager>
     {
         IsDeckSetupFinished = false;
 
-        TransformUtils.RemoveChildObjects(transform);
+        TransformUtils.RemoveChildObjects(cardsHolder);
 
         monsters.Shuffle();
 
         foreach(var monster in monsters)
         {
-            var go = Instantiate(GameAssets.Instance.enemyCardOnlyCover, transform);
+            var go = Instantiate(GameAssets.Instance.enemyCardOnlyCover, cardsHolder);
             go.transform.localPosition = new Vector3(0, 0.5f, 0);
             yield return WaittingCoroutine.RealSeconds(0.3f);
         }
@@ -63,7 +70,7 @@ public class EnemyDeckManager : Singleton<EnemyDeckManager>
         var revealedMonster = monsters.Last();
         monsters.Remove(revealedMonster);
 
-        Destroy(transform.GetChild(transform.childCount - 1).gameObject);
+        Destroy(cardsHolder.GetChild(cardsHolder.childCount - 1).gameObject);
 
         return EnemySpawner.Instance.InstantiateEnemy(revealedMonster);
     }

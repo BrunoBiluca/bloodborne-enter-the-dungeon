@@ -5,11 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/HunterCard")]
 public class HunterCardSO : ScriptableObject
 {
-
     public string cardName;
     public int damage;
     public string effectDescription;
     public bool isInitialCard;
+
+    public bool discartOnRoundEnded;
 
     public Material cardPicture;
 

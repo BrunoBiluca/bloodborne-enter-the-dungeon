@@ -32,7 +32,7 @@ public class HuntersAttackDemoManager : MonoBehaviour
             var enemy = EnemySpawner.Instance.GetEnemy();
             if(enemy == null) return;
 
-            new HuntersAttackTurn(Optional<EnemyBase>.Some(enemy), new List<Hunter>() { hunter }).Execute();
+            new HuntersAttackTurn((GameManager)GameManager.Instance).Execute();
         });
     }
 }

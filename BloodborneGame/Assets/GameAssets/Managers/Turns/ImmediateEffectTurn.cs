@@ -3,18 +3,16 @@ using System.Collections.Generic;
 
 internal class ImmediateEffectTurn : ITurn
 {
-    private Optional<EnemyBase> enemy;
-    private List<Hunter> hunters;
+    private GameManager gameManager;
 
-    public ImmediateEffectTurn(Optional<EnemyBase> enemy, List<Hunter> hunters)
+    public ImmediateEffectTurn(GameManager gameManager)
     {
-        this.enemy = enemy;
-        this.hunters = hunters;
+        this.gameManager = gameManager;
     }
 
     public void Execute()
     {
-        foreach(var hunter in hunters)
+        foreach(var hunter in gameManager.GetAliveHunters())
         {
             hunter.CurrentCard.Some(currentCard => {
                 if(!(currentCard.effect is IImmediateEffect))
@@ -22,7 +20,9 @@ internal class ImmediateEffectTurn : ITurn
 
                 if(currentCard.effect is DamageImmediateEffect)
                 {
-                    enemy.Some(e => {
+                    gameManager.CurrentEnemy.Some(e => {
+                        e.HealthSystem.OnDied += (sender, args) => EnemyDiedHandler(e);
+
                         ResolveDamageImmediateEffect(
                             e,
                             currentCard.damage,
@@ -42,9 +42,20 @@ internal class ImmediateEffectTurn : ITurn
         }
     }
 
+    private void EnemyDiedHandler(EnemyBase e)
+    {
+        if(e.GetType() != typeof(BossEnemy))
+            return;
+
+        foreach(var hunter in gameManager.GetAliveHunters())
+        {
+            hunter.UpdateCanGoToHuntersDream();
+        }
+    }
+
     private void ResolveFullyHealImmediateEffect(CardEffect effect)
     {
-        ((FullyHealImmediateEffect)effect).Setup(hunters).Handle();
+        ((FullyHealImmediateEffect)effect).Setup(gameManager.GetAliveHunters()).Handle();
     }
 
     private void ResolveDamageImmediateEffect(

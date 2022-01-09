@@ -1,31 +1,30 @@
+using Assets.UnityFoundation.Code;
 using Assets.UnityFoundation.Systems.HealthSystem;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HunterHealth : MonoBehaviour, IHealthBar
 {
-
     private float baseHealth;
     private float currentHealth;
 
-    private TMP_Text text;
+    private Image healthImage;
 
     public void Setup(float baseHealth)
     {
         this.baseHealth = baseHealth;
         this.currentHealth = baseHealth;
 
-        if(text == null)
-            text = transform.Find("text").GetComponent<TMP_Text>();
-        text.text = Mathf.FloorToInt(this.currentHealth).ToString();
+        if(healthImage == null)
+            healthImage = transform.FindComponent<Image>("mask.health");
+
+        healthImage.fillAmount = this.currentHealth.Remap(0f, baseHealth, 0.564f, 0.935f);
     }
 
     public void SetCurrentHealth(float currentHealth)
     {
-        this.currentHealth = Mathf.Clamp(currentHealth, 0, baseHealth);
-        text.text = Mathf.FloorToInt(this.currentHealth).ToString();
+        this.currentHealth = currentHealth;
+        healthImage.fillAmount = this.currentHealth.Remap(0f, baseHealth, 0.564f, 0.935f);
     }
 
 }

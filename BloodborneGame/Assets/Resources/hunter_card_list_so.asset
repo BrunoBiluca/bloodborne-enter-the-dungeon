@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb743429d32566a48bdf1514cf964cff, type: 3}
   m_Name: hunter_card_list_so
   m_EditorClassIdentifier: 
+  huntersDreamCard: {fileID: 11400000, guid: 67b2b31566b551e4aba2ed0a0ca651b5, type: 2}
   cards:
   - {fileID: 11400000, guid: a4043d52144826847972a168d34d7610, type: 2}
   - {fileID: 11400000, guid: 286454bfdd1ec4c4096571f2df346cb0, type: 2}

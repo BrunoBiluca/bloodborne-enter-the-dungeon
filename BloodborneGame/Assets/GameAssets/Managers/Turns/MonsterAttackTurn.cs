@@ -16,14 +16,26 @@ public class MonsterAttackTurn : ITurn
         {
             finishedAttack = true;
             return;
-        }   
+        }
 
         enemy.Attack(damage => {
-            gameManager.GetAliveHunters()
-                .ForEach(h => h.HealthSystem.Damage(damage));
+            gameManager
+                .GetAliveHunters()
+                .ForEach(h => h.HealthSystem.Damage(EvaluateDamage(h, damage)));
 
             finishedAttack = true;
         });
+    }
+
+    public int EvaluateDamage(Hunter h, int damage)
+    {
+        if(h.CurrentCard.IsPresentAndGet(out HunterCardSO card))
+        {
+            if(card.effect is IDefenseEffect defenseCard)
+                return (int)defenseCard.Evaluate(damage);
+        }
+
+        return damage;
     }
 
     public bool IsTurnFinished()
