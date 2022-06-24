@@ -1,5 +1,4 @@
-using Assets.UnityFoundation.Code;
-using Assets.UnityFoundation.Code.Common;
+using UnityFoundation.Code;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -97,7 +96,7 @@ public class HunterCardsUI : Singleton<HunterCardsUI>
     {
         if(Input.GetMouseButtonDown(0))
         {
-            if(PhysicsUtils.RaycastType(
+            if(RaycastHelper.RaycastType(
                     Input.mousePosition,
                     out HunterCard hunterCard,
                     LayerMask.NameToLayer("UI")

@@ -1,6 +1,6 @@
 using Assets.UnityFoundation.Code;
-using Assets.UnityFoundation.Code.Common;
-using Assets.UnityFoundation.TimeUtils;
+using UnityFoundation.Code;
+using UnityFoundation.Tools.TimeUtils;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

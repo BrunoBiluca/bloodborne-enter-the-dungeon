@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +7,7 @@ public class DiceRollDemoManager : MonoBehaviour
     {
         if(Mouse.current.leftButton.wasPressedThisFrame){
             Debug.Log("sdf");
-            PhysicsUtils.RaycastTypeMousePosition(
+            RaycastHelper.RaycastTypeMousePosition(
                 out Dice target, LayerMask.NameToLayer("Default")
             );
 

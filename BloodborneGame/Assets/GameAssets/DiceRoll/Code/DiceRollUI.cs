@@ -1,5 +1,5 @@
-using Assets.UnityFoundation.Code.Common;
-using Assets.UnityFoundation.TimeUtils;
+using UnityFoundation.Code;
+using UnityFoundation.Tools.TimeUtils;
 using System.Collections;
 using TMPro;
 using UnityEngine;

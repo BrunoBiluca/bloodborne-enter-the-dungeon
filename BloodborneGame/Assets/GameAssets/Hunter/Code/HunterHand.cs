@@ -1,10 +1,8 @@
-using Assets.UnityFoundation.Code;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityFoundation.Code;
 
 public class HunterCardOnHand
 {

@@ -1,4 +1,4 @@
-using Assets.UnityFoundation.Code.Common;
+using UnityFoundation.Code;
 using TMPro;
 
 public class GameCanvasUI : Singleton<GameCanvasUI>

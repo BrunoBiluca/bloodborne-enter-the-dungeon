@@ -1,7 +1,7 @@
-using Assets.UnityFoundation.Code.Common;
-using Assets.UnityFoundation.GameManagers;
+using UnityFoundation.Code;
 using System;
 using UnityEngine;
+using UnityFoundation.Code.GameManagers;
 
 public class EnemyAttackHandler : Singleton<EnemyAttackHandler>
 {

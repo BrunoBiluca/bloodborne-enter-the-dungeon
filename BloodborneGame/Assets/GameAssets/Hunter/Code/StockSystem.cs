@@ -1,9 +1,9 @@
-using Assets.UnityFoundation.TimeUtils;
+using UnityFoundation.Tools.TimeUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Assets.UnityFoundation.Code;
+using UnityFoundation.Code;
 
 public class StockSystem : MonoBehaviour
 {

@@ -1,4 +1,4 @@
-using Assets.UnityFoundation.Code.Common;
+using UnityFoundation.Code;
 using UnityEngine;
 
 public class HunterCardDeckManager : Singleton<HunterCardDeckManager>

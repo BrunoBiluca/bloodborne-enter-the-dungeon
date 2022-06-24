@@ -1,12 +1,11 @@
-using Assets.UnityFoundation.Code.Common;
-using Assets.UnityFoundation.Code.TimeUtils;
-using Assets.UnityFoundation.GameManagers;
-using Assets.UnityFoundation.TimeUtils;
-using Assets.UnityFoundation.UI.Menus.GameOverMenu;
+using UnityFoundation.Code;
+using UnityFoundation.Tools.TimeUtils;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityFoundation.Code.GameManagers;
+using UnityFoundation.UI.Menus.GameOverMenu;
 
 public class GameManager : BaseGameManager
 {
@@ -22,14 +21,14 @@ public class GameManager : BaseGameManager
                     enemyDiscart.Discart(enemy);
                     Destroy(enemy.gameObject);
                     currentEnemy = Optional<EnemyBase>.None();
-               };
+                };
             }
         }
     }
 
     private List<Hunter> hunters = new List<Hunter>();
 
-    public List<Hunter> GetAliveHunters() =>  hunters.FindAll(h => !h.IsDead);
+    public List<Hunter> GetAliveHunters() => hunters.FindAll(h => !h.IsDead);
 
     private ITurn currentTurn;
 
@@ -41,7 +40,7 @@ public class GameManager : BaseGameManager
     private int currentRound = 0;
 
     private float startTime;
-    private Timer updateTimeCanvasTimer;
+    private ITimer updateTimeCanvasTimer;
 
     private void Start()
     {
@@ -55,7 +54,7 @@ public class GameManager : BaseGameManager
 
         StartCoroutine(GameBoostrap());
     }
-    
+
     private void Update()
     {
         if(!canChangeTurn) return;
@@ -115,7 +114,8 @@ public class GameManager : BaseGameManager
             return;
         }
 
-        if(currentTurn.GetType() == typeof(HuntersDreamTurn)){
+        if(currentTurn.GetType() == typeof(HuntersDreamTurn))
+        {
             GameTurnsUI.Instance.ChangeTurn(0);
             StartCoroutine(ChangeTurn(new RevealMonsterTurn(this, hunters)));
         }
@@ -149,7 +149,7 @@ public class GameManager : BaseGameManager
         startTime = Time.time;
 
         updateTimeCanvasTimer = new Timer(
-            1f, 
+            1f,
             () => GameTurnsUI.Instance.UpdateTimeCounter(Time.time - startTime)
         )
         .Start();

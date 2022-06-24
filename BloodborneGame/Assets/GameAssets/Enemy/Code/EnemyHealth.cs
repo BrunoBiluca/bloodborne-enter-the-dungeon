@@ -1,5 +1,5 @@
 using Assets.UnityFoundation.Systems.HealthSystem;
-using Assets.UnityFoundation.TimeUtils;
+using UnityFoundation.Tools.TimeUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

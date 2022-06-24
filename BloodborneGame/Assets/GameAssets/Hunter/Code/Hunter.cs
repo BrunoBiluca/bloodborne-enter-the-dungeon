@@ -1,4 +1,4 @@
-using Assets.UnityFoundation.Code.Common;
+using UnityFoundation.Code;
 using Assets.UnityFoundation.Systems.HealthSystem;
 using System;
 using UnityEngine;
@@ -32,7 +32,7 @@ public class Hunter : MonoBehaviour
 
         HealthSystem = GetComponent<HealthSystem>();
         HealthSystem.SetDestroyHealthbar(false);
-        HealthSystem.SetDestroyOnDied(false);
+        HealthSystem.DestroyOnDied = false;
         HealthSystem.OnDied += (sender, args) => {
             IsDead = true;
             stockSystem.RemoveAll();

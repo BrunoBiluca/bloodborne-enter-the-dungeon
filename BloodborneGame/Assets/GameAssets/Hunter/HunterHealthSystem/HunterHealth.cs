@@ -1,7 +1,7 @@
-using Assets.UnityFoundation.Code;
 using Assets.UnityFoundation.Systems.HealthSystem;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityFoundation.Code;
 
 public class HunterHealth : MonoBehaviour, IHealthBar
 {
