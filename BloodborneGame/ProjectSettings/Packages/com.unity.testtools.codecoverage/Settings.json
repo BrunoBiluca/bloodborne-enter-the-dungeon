@@ -1,0 +1,38 @@
+{
+    "m_Name": "Settings",
+    "m_Path": "ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json",
+    "m_Dictionary": {
+        "m_DictionaryValues": [
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "Path",
+                "value": "{\"m_Value\":\"{ProjectPath}\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "HistoryPath",
+                "value": "{\"m_Value\":\"{ProjectPath}\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "IncludeAssemblies",
+                "value": "{\"m_Value\":\"UnityFoundation.AmmoStorageSystem,UnityFoundation.AmmoStorageSystem.Tests,UnityFoundation.BaseCharacter,UnityFoundation.BuildingPlacementSystem,UnityFoundation.CameraMovementXZ,UnityFoundation.CameraScripts,UnityFoundation.CarSystem,UnityFoundation.Character2D,UnityFoundation.Character3D,UnityFoundation.Character3D.Tests,UnityFoundation.CheckGround.Tests,UnityFoundation.Code,UnityFoundation.Code.Tests,UnityFoundation.Compass,UnityFoundation.Compass.Tests,UnityFoundation.DialogueSystem,UnityFoundation.DialogueSystem.Editor,UnityFoundation.DiceSystem,UnityFoundation.DiceSystem.Tests,UnityFoundation.Editor,UnityFoundation.EditorInspector,UnityFoundation.FirstPersonModeSystem,UnityFoundation.FirstPersonModeSystem.Tests,UnityFoundation.FreeCamera,UnityFoundation.HealthSystem,UnityFoundation.HealthSystem.Editor,UnityFoundation.HealthSystem.Tests,UnityFoundation.LeaderBoardSystem,UnityFoundation.ObjectPooling,UnityFoundation.PathFinder,UnityFoundation.Physics2D,UnityFoundation.Physics3D,UnityFoundation.ProceduralGeneration,UnityFoundation.QuestSystem,UnityFoundation.Radar,UnityFoundation.Radar.Tests,UnityFoundation.SavingSystem,UnityFoundation.SettingsSystem,UnityFoundation.TestUtility,UnityFoundation.Tools.MeshBuilders,UnityFoundation.Tools.Spline,UnityFoundation.Tools.Spline.Editor,UnityFoundation.Tools.TimeUtils,UnityFoundation.UI,UnityFoundation.Zombies,UnityFoundation.Zombies.Tests\"}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "EnableCodeCoverage",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "AutoGenerateReport",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "GenerateAdditionalMetrics",
+                "value": "{\"m_Value\":false}"
+            }
+        ]
+    }
+}

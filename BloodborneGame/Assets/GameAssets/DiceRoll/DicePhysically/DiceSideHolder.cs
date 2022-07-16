@@ -1,3 +1,4 @@
+using DiceRoll;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class DiceSideHolder : MonoBehaviour
 
     public void Setup(DiceSideSO diceSide)
     {
-        this.DiceSide = diceSide;
+        DiceSide = diceSide;
 
         diceOwner = transform.parent.GetComponent<Dice>();
     }

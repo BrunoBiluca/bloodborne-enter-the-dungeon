@@ -2,11 +2,12 @@ using UnityFoundation.Code;
 using System;
 using UnityEngine;
 using UnityFoundation.Code.GameManagers;
+using DiceRoll;
 
 public class EnemyAttackHandler : Singleton<EnemyAttackHandler>
 {
 
-    public void Handle(DiceSO dice, Action<int> attackFinished)
+    public void Handle(HunterDiceSO dice, Action<int> attackFinished)
     {
         RollDice(
             dice,
@@ -21,7 +22,7 @@ public class EnemyAttackHandler : Singleton<EnemyAttackHandler>
             });
     }
 
-    private void RollDice(DiceSO dice, int damageAccumulator, Action<int> diceRolled)
+    private void RollDice(HunterDiceSO dice, int damageAccumulator, Action<int> diceRolled)
     {
         StartCoroutine(DiceRollManager.Instance.RollWithAnimation(
             dice,

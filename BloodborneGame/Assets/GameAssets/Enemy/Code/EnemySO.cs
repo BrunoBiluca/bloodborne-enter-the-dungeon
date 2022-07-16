@@ -1,3 +1,4 @@
+using DiceRoll;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class EnemySO : ScriptableObject
     public bool isBoss;
     public string description;
     public int echoesCounter;
-    public DiceSO lantern;
+    public HunterDiceSO lantern;
 
     public List<EnemyEffectParameter> parameters;
     public EnemyEffect effect;

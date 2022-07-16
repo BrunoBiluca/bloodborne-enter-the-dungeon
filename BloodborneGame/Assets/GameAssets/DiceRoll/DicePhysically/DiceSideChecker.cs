@@ -1,3 +1,4 @@
+using DiceRoll;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,6 @@ public class DiceSideChecker : MonoBehaviour
     private List<Dice> evaluateDices = new List<Dice>();
 
     private void OnTriggerStay(Collider other) {
-        Debug.Log("erwre");
         if(!TryGetComponent(out DiceSideHolder side))
             return;
 

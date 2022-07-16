@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e109551169843e4ba6dabf9ea601e17, type: 3}
+  m_Script: {fileID: 11500000, guid: 9964704a78c39324c8a8ebf2b1d8d0b1, type: 3}
   m_Name: YellowDice
   m_EditorClassIdentifier: 
   diceType: 1
@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb42b85c1881ea54d9a6c53723d5c18d, type: 2}
   - {fileID: 11400000, guid: fb42b85c1881ea54d9a6c53723d5c18d, type: 2}
   - {fileID: 11400000, guid: 984b94969c92c1e42b68932818322a3f, type: 2}
-  - {fileID: 11400000, guid: 418986c632f258d4facaa0aee6a4a1f9, type: 2}
+  - {fileID: 11400000, guid: 1f97df7fa7289874f884ed7c1dd20355, type: 2}
   - {fileID: 11400000, guid: 54bfc3aeef49c0048a22fc1c4a05f27a, type: 2}
   sprite: {fileID: 21300000, guid: aa2b300dd9c071e45816cd5c4bbce51a, type: 3}
   lanternSprite: {fileID: 21300000, guid: aa2b300dd9c071e45816cd5c4bbce51a, type: 3}

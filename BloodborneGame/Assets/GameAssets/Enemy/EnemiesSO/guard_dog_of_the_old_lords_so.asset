@@ -18,4 +18,6 @@ MonoBehaviour:
   isBoss: 1
   description: "Cada Arma de fogo causa no m\xE1ximo 1 de dano a este inimigo."
   echoesCounter: 12
-  lantern: {fileID: 11400000, guid: 97cd514d97f22d444a92dfcabdcda012, type: 2}
+  lantern: {fileID: 11400000, guid: 739f75fed5d2f6b41baa0cd2801fc07f, type: 2}
+  parameters: []
+  effect: {fileID: 0}

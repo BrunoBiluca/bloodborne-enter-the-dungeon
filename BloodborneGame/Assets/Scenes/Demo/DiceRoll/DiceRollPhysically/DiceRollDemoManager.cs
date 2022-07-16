@@ -1,26 +1,24 @@
+using DiceRoll;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityFoundation.DiceSystem;
 
 public class DiceRollDemoManager : MonoBehaviour
 {
-    void Update()
+    [SerializeField] private DiceRoll.Dice dice;
+
+    public void Update()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame){
-            Debug.Log("sdf");
-            RaycastHelper.RaycastTypeMousePosition(
-                out Dice target, LayerMask.NameToLayer("Default")
-            );
+        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            var forceValue = Random.Range(400, 800);
+            var directionX = Random.Range(0, 500);
+            var directionY = Random.Range(0, 500);
+            var directionZ = Random.Range(0, 500);
 
-            if(target != null){
-                var forceValue = Random.Range(200, 500);
-                var directionX = Random.Range(0, 500);
-                var directionY = Random.Range(0, 500);
-                var directionZ = Random.Range(0, 500);
-
-                var diceRb = target.GetComponent<Rigidbody>();
-                diceRb.AddForce(target.transform.up * forceValue);
-                diceRb.AddTorque(directionX, directionY, directionZ);
-            }
+            var diceRb = dice.GetComponent<Rigidbody>();
+            diceRb.AddForce(Vector3.up * forceValue);
+            diceRb.AddTorque(directionX, directionY, directionZ);
         }
     }
 }
